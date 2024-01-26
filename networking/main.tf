@@ -1,4 +1,4 @@
-resource "aws_vpc" "tr_${var.prefix}_vpc" {
+resource "aws_vpc" "tr_vpc" {
   cidr_block           = var.address_space
   enable_dns_hostnames = true
 
@@ -8,7 +8,7 @@ resource "aws_vpc" "tr_${var.prefix}_vpc" {
   }
 }
 
-resource "aws_subnet" "tr_${var.prefix}_public_subnet" {
+resource "aws_subnet" "tr_public_subnet" {
   vpc_id                  = aws_vpc.${var.prefix}-vpc.id
   cidr_block              = var.public_cidrs
   map_public_ip_on_launch = true
@@ -19,7 +19,7 @@ resource "aws_subnet" "tr_${var.prefix}_public_subnet" {
   }
 }
 
-resource "aws_subnet" "tr_${var.prefix}_private_subnet" {
+resource "aws_subnet" "tr_private_subnet" {
   vpc_id                  = aws_vpc.${var.prefix}-vpc.id
   cidr_block              = var.private_cidrs
   map_public_ip_on_launch = false
@@ -30,7 +30,7 @@ resource "aws_subnet" "tr_${var.prefix}_private_subnet" {
   }
 }
 
-resource "aws_internet_gateway" "tr_${var.prefix}_internet_gateway" {
+resource "aws_internet_gateway" "tr_internet_gateway" {
   vpc_id                  = aws_vpc.${var.prefix}-vpc.id
 
   tags = {
@@ -42,7 +42,7 @@ resource "aws_internet_gateway" "tr_${var.prefix}_internet_gateway" {
   }
 }
 
-resource "aws_route_table" "tr_${var.prefix}_public_rt" {
+resource "aws_route_table" "tr_public_rt" {
   vpc_id                  = aws_vpc.${var.prefix}-vpc.id
 
   tags = {
@@ -52,14 +52,14 @@ resource "aws_route_table" "tr_${var.prefix}_public_rt" {
 }
 
 
-resource "aws_route" "tr_${var.prefix}_default_route" {
+resource "aws_route" "tr_default_route" {
   route_table_id         = aws_route_table.${var.prefix}_public_rt.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.${var.prefix}_internet_gateway.id
 }
 
 
-resource "aws_security_group" "tr_${var.prefix}_security_group_http" {
+resource "aws_security_group" "tr_security_group_http" {
   name = "${var.prefix}-security-group-http"
 
   vpc_id =  aws_vpc.${var.prefix}-vpc.id
@@ -88,7 +88,7 @@ resource "aws_security_group" "tr_${var.prefix}_security_group_http" {
   }
 }
 
-resource "aws_security_group" "tr_${var.prefix}_security_group_https" {
+resource "aws_security_group" "tr_security_group_https" {
   name = "${var.prefix}-security-group-https"
 
   vpc_id =  aws_vpc.${var.prefix}-vpc.id
@@ -117,7 +117,7 @@ resource "aws_security_group" "tr_${var.prefix}_security_group_https" {
   }
 }
 
-resource "aws_security_group" "tr_${var.prefix}_security_group_ssh" {
+resource "aws_security_group" "tr_security_group_ssh" {
   name = "${var.prefix}-security-group-ssh"
 
   vpc_id =  aws_vpc.${var.prefix}-vpc.id
