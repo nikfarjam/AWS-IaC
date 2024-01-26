@@ -9,7 +9,7 @@ resource "aws_vpc" "tr_vpc" {
 }
 
 resource "aws_subnet" "tr_public_subnet" {
-  vpc_id                  = aws_vpc.${var.prefix}-vpc.id
+  vpc_id                  = aws_vpc.tr_vpc.id
   cidr_block              = var.public_cidrs
   map_public_ip_on_launch = true
 
@@ -20,7 +20,7 @@ resource "aws_subnet" "tr_public_subnet" {
 }
 
 resource "aws_subnet" "tr_private_subnet" {
-  vpc_id                  = aws_vpc.${var.prefix}-vpc.id
+  vpc_id                  = aws_vpc.tr_vpc.id
   cidr_block              = var.private_cidrs
   map_public_ip_on_launch = false
 
@@ -31,7 +31,7 @@ resource "aws_subnet" "tr_private_subnet" {
 }
 
 resource "aws_internet_gateway" "tr_internet_gateway" {
-  vpc_id                  = aws_vpc.${var.prefix}-vpc.id
+  vpc_id                  = aws_vpc.tr_vpc.id
 
   tags = {
     Name = "mtc_igw"
@@ -43,7 +43,7 @@ resource "aws_internet_gateway" "tr_internet_gateway" {
 }
 
 resource "aws_route_table" "tr_public_rt" {
-  vpc_id                  = aws_vpc.${var.prefix}-vpc.id
+  vpc_id                  = aws_vpc.tr_vpc.id
 
   tags = {
     name = "${var.prefix}_public_rt"
@@ -62,7 +62,7 @@ resource "aws_route" "tr_default_route" {
 resource "aws_security_group" "tr_security_group_http" {
   name = "${var.prefix}-security-group-http"
 
-  vpc_id =  aws_vpc.${var.prefix}-vpc.id
+  vpc_id =  aws_vpc.tr_vpc.id
 
   ingress {
     from_port   = 80
@@ -91,7 +91,7 @@ resource "aws_security_group" "tr_security_group_http" {
 resource "aws_security_group" "tr_security_group_https" {
   name = "${var.prefix}-security-group-https"
 
-  vpc_id =  aws_vpc.${var.prefix}-vpc.id
+  vpc_id =  aws_vpc.tr_vpc.id
 
   ingress {
     from_port   = 443
@@ -120,7 +120,7 @@ resource "aws_security_group" "tr_security_group_https" {
 resource "aws_security_group" "tr_security_group_ssh" {
   name = "${var.prefix}-security-group-ssh"
 
-  vpc_id =  aws_vpc.${var.prefix}-vpc.id
+  vpc_id =  aws_vpc.tr_vpc.id
 
   ingress {
     from_port   = 22
