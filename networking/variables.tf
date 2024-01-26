@@ -25,3 +25,9 @@ variable "private_cidrs" {
   description = "(Optional) The address space the private subnet uses. Defaults to 10.0.2.0/24."
   default     = "10.0.2.0/24"
 }
+
+variable "environment" {
+  type        = string
+  description = "(Optional) Environment that this resource is used for"
+  default     = "dev"
+}
