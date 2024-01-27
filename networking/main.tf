@@ -14,7 +14,7 @@ resource "aws_subnet" "tr_public_subnet" {
   map_public_ip_on_launch = true
 
   tags = {
-    name = "${var.prefix}-public-subnet-${var.aws_region}"
+    name        = "${var.prefix}-public-subnet-${var.aws_region}"
     environment = var.environment
   }
 }
@@ -25,25 +25,25 @@ resource "aws_subnet" "tr_private_subnet" {
   map_public_ip_on_launch = false
 
   tags = {
-    name = "${var.prefix}-private-subnet-${var.aws_region}"
+    name        = "${var.prefix}-private-subnet-${var.aws_region}"
     environment = var.environment
   }
 }
 
 resource "aws_internet_gateway" "tr_internet_gateway" {
-  vpc_id                  = aws_vpc.tr_vpc.id
+  vpc_id = aws_vpc.tr_vpc.id
 
   tags = {
-    name = "${var.prefix}_igw"
+    name        = "${var.prefix}_igw"
     environment = var.environment
   }
 }
 
 resource "aws_route_table" "tr_public_rt" {
-  vpc_id                  = aws_vpc.tr_vpc.id
+  vpc_id = aws_vpc.tr_vpc.id
 
   tags = {
-    name = "${var.prefix}_public_rt"
+    name        = "${var.prefix}_public_rt"
     environment = var.environment
   }
 }
@@ -59,7 +59,7 @@ resource "aws_route" "tr_default_route" {
 resource "aws_security_group" "tr_security_group_http" {
   name = "${var.prefix}-security-group-http"
 
-  vpc_id =  aws_vpc.tr_vpc.id
+  vpc_id = aws_vpc.tr_vpc.id
 
   ingress {
     from_port   = 80
@@ -76,7 +76,7 @@ resource "aws_security_group" "tr_security_group_http" {
   }
 
   tags = {
-    name = "${var.prefix}-security-group-http"
+    name        = "${var.prefix}-security-group-http"
     environment = var.environment
   }
 
@@ -88,7 +88,7 @@ resource "aws_security_group" "tr_security_group_http" {
 resource "aws_security_group" "tr_security_group_https" {
   name = "${var.prefix}-security-group-https"
 
-  vpc_id =  aws_vpc.tr_vpc.id
+  vpc_id = aws_vpc.tr_vpc.id
 
   ingress {
     from_port   = 443
@@ -105,7 +105,7 @@ resource "aws_security_group" "tr_security_group_https" {
   }
 
   tags = {
-    name = "${var.prefix}-security-group-http"
+    name        = "${var.prefix}-security-group-http"
     environment = var.environment
   }
 
@@ -117,7 +117,7 @@ resource "aws_security_group" "tr_security_group_https" {
 resource "aws_security_group" "tr_security_group_ssh" {
   name = "${var.prefix}-security-group-ssh"
 
-  vpc_id =  aws_vpc.tr_vpc.id
+  vpc_id = aws_vpc.tr_vpc.id
 
   ingress {
     from_port   = 22
@@ -134,7 +134,7 @@ resource "aws_security_group" "tr_security_group_ssh" {
   }
 
   tags = {
-    name = "${var.prefix}-security-group-ssh"
+    name        = "${var.prefix}-security-group-ssh"
     environment = var.environment
   }
 

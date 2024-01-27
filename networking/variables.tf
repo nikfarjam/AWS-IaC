@@ -10,24 +10,22 @@ variable "prefix" {
 
 variable "address_space" {
   type        = string
-  description = "(Optional) The address space used by the virtual network. Defaults to 10.0.0.0/16."
-  default     = "10.0.0.0/16"
+  description = "(Required) The address space used by the virtual network."
 }
 
 variable "public_cidrs" {
   type        = string
-  description = "(Optional) The address space used by the public subnet. Defaults to 10.0.1.0/24."
-  default     = "10.0.1.0/24"
+  description = "(Required) The address space used by the public subnet."
 }
 
 variable "private_cidrs" {
   type        = string
-  description = "(Optional) The address space the private subnet uses. Defaults to 10.0.2.0/24."
+  description = "(Required) The address space the private subnet uses."
   default     = "10.0.2.0/24"
 }
 
 variable "environment" {
   type        = string
-  description = "(Optional) Environment that this resource is used for"
+  description = "(Optional) Environment that this resource is used for.  Defaults to dev"
   default     = "dev"
 }
