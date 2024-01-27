@@ -1,5 +1,6 @@
 module "networking" {
   source           = "./networking"
+  prefix           = var.prefix
   aws_region       = var.aws_region
   prefix           = var.prefix
   environment      = var.environment
