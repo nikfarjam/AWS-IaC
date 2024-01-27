@@ -34,9 +34,6 @@ resource "aws_internet_gateway" "tr_internet_gateway" {
   vpc_id                  = aws_vpc.tr_vpc.id
 
   tags = {
-    Name = "mtc_igw"
-  }
-  tags = {
     name = "${var.prefix}_igw"
     environment = var.environment
   }
@@ -53,7 +50,7 @@ resource "aws_route_table" "tr_public_rt" {
 
 
 resource "aws_route" "tr_default_route" {
-  route_table_id         = aws_route_table.${var.prefix}_public_rt.id
+  route_table_id         = aws_route_table.tr_public_rt.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.${var.prefix}_internet_gateway.id
 }
