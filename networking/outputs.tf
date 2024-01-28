@@ -3,11 +3,11 @@ output "vpc_id" {
 }
 
 output "private_subnet_group_name" {
-  value = aws_subnet.tr_private_subnet.name
+  value = aws_subnet.tr_private_subnet.id
 }
 
 output "public_subnet_group_name" {
-  value = aws_subnet.tr_public_subnet.name
+  value = aws_subnet.tr_public_subnet.id
 }
 
 output "vpc_security_group_http" {
