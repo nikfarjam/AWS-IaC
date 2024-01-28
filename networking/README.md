@@ -1,2 +1,2 @@
 # VPC Module
-Thia Terraform module manages AWS networks
+This Terraform module manages AWS network resources including VCP, Subnets, Internet Gateway, Route and Security Groups
